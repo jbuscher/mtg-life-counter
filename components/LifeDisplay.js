@@ -7,7 +7,7 @@ export default class LifeDisplay extends React.Component {
       <TouchableHighlight style={[styles.highlight, this.props.style]} 
         underlayColor='rgba(0, 0, 120, .08)'
         onLongPress={this.props.onLongPress}>
-        <Text style={[styles.lifeDisplay, {width: digitWidth * this.countDigits(this.props.life)}]}>
+        <Text style={[styles.lifeDisplay, {width: digitWidth * this.countDigits(this.props.life)}, {color: this.props.color}]}>
           {this.props.life}
         </Text>
       </TouchableHighlight>

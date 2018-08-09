@@ -1,10 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements';
+import DiceDialog from './DiceDialog';
 
 export default class MiddleSection extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {dialogVisible: false};
+    this.toggleDiceDialog = this.toggleDiceDialog.bind(this);
   }
 
   render() {
@@ -12,7 +15,7 @@ export default class MiddleSection extends React.Component {
       <View style={styles.middleSection}>
         <View style={styles.middleLine} />
         <TouchableOpacity style={styles.icon}>
-          <Icon name='casino' size={44} color='grey'/>
+          <Icon name='casino' size={44} color='grey' onPress={this.toggleDiceDialog}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.icon} onPress={this.props.handleSettings}>
           <Icon name='settings' size={44} color='grey'/>
@@ -21,8 +24,17 @@ export default class MiddleSection extends React.Component {
           <Icon name='refresh' size={44} color='grey'/>
         </TouchableOpacity>
         <View style={styles.middleLine} />
+        <DiceDialog dialogVisible={this.state.dialogVisible} 
+                  toggle={this.toggleDiceDialog}
+                  /> 
       </View>
     );
+  }
+
+  toggleDiceDialog() {
+    this.setState((prevState) => {
+      return {dialogVisible: !prevState.dialogVisible};
+    });
   }
 }
 

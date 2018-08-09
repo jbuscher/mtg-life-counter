@@ -15,13 +15,15 @@ export default class PlayerContainer extends React.Component {
   }
 
   render() {
+    let bgColor = this.props.darkThemeEnabled ? styles.darkTheme : styles.lightTheme;
+    let lifeColor = this.props.darkThemeEnabled ? 'white' : 'black';
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, bgColor]}>
         <View style={this.props.style}>
           <ChangeLifeButton amount={-1} onPress={this.props.onLifeChange} playerId={this.props.playerId} />
           <ChangeLifeButton amount={-5} onPress={this.props.onLifeChange} playerId={this.props.playerId} />
         </View>
-        <LifeDisplay style={this.props.style} life={this.props.life} onLongPress={this.toggleDialog}/>
+        <LifeDisplay style={this.props.style} life={this.props.life} onLongPress={this.toggleDialog} color={lifeColor}/>
         <View style={this.props.style}>
           <ChangeLifeButton amount={1} onPress={this.props.onLifeChange} playerId={this.props.playerId} />
           <ChangeLifeButton amount={5} onPress={this.props.onLifeChange} playerId={this.props.playerId} />
@@ -30,6 +32,7 @@ export default class PlayerContainer extends React.Component {
                           toggle={this.toggleDialog}
                           setLife={this.props.onLifeEntry}
                           playerId={this.props.playerId}
+                          color={lifeColor}
                           /> 
       </View>
     );
@@ -46,8 +49,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  lightTheme: {
+    backgroundColor: '#fff'
+  },
+  darkTheme: {
+    backgroundColor: '#3B3A32'
   }
 });
